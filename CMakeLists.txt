@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(numeric_meta ${PROJECT_NAME} LANGUAGES CXX)
+
+set(SOURCES
+    main.cpp)
+set(HEADERS
+    include/simply_meta.hpp
+    include/base_meta_func.hpp
+    include/diff_equation.hpp
+    include/integrate_meta.hpp )
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftemplate-depth=14800")
+
+find_package(Boost ${BOOST_MIN_VERSION} COMPONENTS context system regex)
+
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+
+target_link_libraries (${PROJECT_NAME} ${Boost_LIBRARIES})
